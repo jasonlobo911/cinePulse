@@ -1,4 +1,4 @@
-import 'package:cine_pulse/screens/homescreen.dart';
+import 'package:cine_pulse/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

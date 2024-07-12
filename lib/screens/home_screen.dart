@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(children: [
         Container(
           decoration: BoxDecoration(color: Colors.blue[900]),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.only(right: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -40,17 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {},
                 icon: const Icon(Icons.menu_rounded, color: Colors.white),
               ),
-              Stack(alignment: Alignment.center, children: const [
-                Icon(Icons.tv_rounded, size: 35, color: Colors.white),
-                Icon(Icons.play_arrow_rounded, size: 20, color: Colors.white)
-              ]),
-              Row(
+              Stack(
+                alignment: Alignment.center,
                 children: const [
-                  Icon(Icons.person_rounded, color: Colors.white),
-                  SizedBox(width: 10),
-                  Icon(Icons.search_rounded, color: Colors.white),
+                  Icon(Icons.tv_rounded, size: 35, color: Colors.white),
+                  Icon(Icons.play_arrow_rounded, size: 20, color: Colors.white)
                 ],
-              )
+              ),
+              const Icon(Icons.person_rounded, color: Colors.white)
             ],
           ),
         ),
@@ -60,10 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Stack(
                   children: [
-                    Image.asset('assets/images/home_view.png'),
+                    Image.asset('assets/images/home_view.png',
+                        height: size.width - 100, width: size.width, fit: BoxFit.fill),
                     Container(
                       width: size.width,
-                      height: size.width,
+                      height: size.width - 100,
                       color: Colors.blue[700]?.withOpacity(0.8),
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -125,18 +123,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-                  child: Column(
-                    children: [
-                      Row(
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, left: 10),
+                      child: Row(
                         children: [
-                          const Text("Trending", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                          const Text("Trending", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                           const SizedBox(width: 10),
                           Container(
-                            height: 40,
-                            width: size.width * 0.3,
-                            padding: const EdgeInsets.all(10),
+                            height: 30,
+                            width: 120,
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.blue[900],
@@ -177,8 +175,81 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(top: 10),
+                      height: 310,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal, // Set horizontal scrolling
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: const EdgeInsets.only(left: 10, bottom: 20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10), color: Colors.grey[300]),
+                                      height: 230,
+                                      width: 150,
+                                      child: const Center(
+                                          child: Icon(Icons.image_outlined, color: Colors.white60, size: 100)),
+                                    ),
+                                    Positioned(
+                                      top: 10,
+                                      right: 10,
+                                      child: Container(
+                                        width: 20,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(20),
+                                            color: Colors.white.withOpacity(0.5)),
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(Icons.more_horiz_rounded, color: Colors.grey),
+                                          iconSize: 20,
+                                          padding: const EdgeInsets.only(right: 10),
+                                          splashRadius: 10,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 215, left: 15),
+                                      width: 30,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20), color: Colors.blue[900]),
+                                      child: IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.favorite_border_outlined, color: Colors.white),
+                                        iconSize: 20,
+                                        padding: const EdgeInsets.all(5),
+                                        splashRadius: 10,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: const [
+                                      Text("Movie Name", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                      Text("Date", style: TextStyle(fontSize: 12)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
